@@ -3,6 +3,7 @@ package com.realdolmen.springmvcrecipes.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Getter
@@ -24,6 +25,8 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
+
+    @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
     @Lob
@@ -37,4 +40,13 @@ public class Recipe {
             mappedBy = "recipe"
     )
     private Set<Ingredient> ingredients;
+
+    @ManyToMany
+    @JoinTable(
+            name = "recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Collection<Category> categories;
+
 }

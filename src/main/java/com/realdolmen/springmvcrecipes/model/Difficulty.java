@@ -1,4 +1,11 @@
 package com.realdolmen.springmvcrecipes.model;
 
-public class Difficulty {
+import javax.persistence.Entity;
+
+public enum Difficulty {
+
+    EASY,
+    MODERATE,
+    HARD
+
 }
