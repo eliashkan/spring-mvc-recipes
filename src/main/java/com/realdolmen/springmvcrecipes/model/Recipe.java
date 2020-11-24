@@ -3,12 +3,14 @@ package com.realdolmen.springmvcrecipes.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@Builder
 @Entity
 public class Recipe {
 
@@ -22,11 +24,17 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    // private Difficulty difficulty;
+    private Difficulty difficulty;
 
     @Lob
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Note note;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "recipe"
+    )
+    private Set<Ingredient> ingredients;
 }
